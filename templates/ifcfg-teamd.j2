@@ -1,0 +1,3 @@
+DEVICE={{ teamd_config.device }}
+TEAM_CONFIG="{{ (teamd_config|to_json)|replace('"','\\"') }}"
+ONBOOT=yes

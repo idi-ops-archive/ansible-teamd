@@ -1,0 +1,26 @@
+---
+
+- name: Remove non-teamd port configuration files
+  file:
+    path: "/etc/sysconfig/network-scripts/ifcfg-{{ item }}"
+    state: absent
+  with_items: teamd_config.ports|list
+
+- name: Configure master device
+  template:
+    src: ifcfg-teamd.j2
+    dest: "/etc/sysconfig/network-scripts/ifcfg-{{ teamd_config.device }}"
+
+- name: Configure ports
+  template:
+    src: ifcfg-teamd-port.j2
+    dest: "/etc/sysconfig/network-scripts/ifcfg-{{ teamd_config.device }}-{{ item }}"
+  with_items: teamd_config.ports|list
+
+#- name: Start interface
+#  command: "/usr/sbin/ifup {{ teamd_config.device }}"
+
+#- name: Check if interface is up
+#  command: "/usr/sbin/ip link show {{ teamd_config.device }}"
+#  register: iplink_show
+#  failed_when: '"LOWER_UP" not in iplink_show.stdout'

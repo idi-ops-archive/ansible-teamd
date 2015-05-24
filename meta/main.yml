@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Giovanni Tirloni
+  description: Creates a teamd interface
+  company: Inclusive Design Research Centre
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: EL
+    versions:
+    - 7
+  categories:
+  - system
+dependencies: []
